@@ -1,12 +1,12 @@
-﻿﻿﻿﻿﻿﻿﻿拱拱Lite开发（1）：调用三翼API实现登陆、课表获取、饭卡信息……
+﻿﻿#拱拱Lite开发（1）：调用三翼API实现登陆、课表获取、饭卡信息……
 
 拱拱Lite是我UWP上的第一个作品，我也很乐意分享在开发时的收获，因此写下这一系列的文章，也算作一种积累吧，期望能有所帮助~
 
-（1）从官方文档开始
+##（1）从官方文档开始
 
 首先，我们来分析三翼给的API文档：
 
-![Image text](https://raw.githubusercontent.com/hongmaju/light7Local/master/img/productShow/20170518152848.png)
+![Image text](https://github.com/StanleyOf427/Documents/blob/master/GongGongLite/img/1_1.png)
 
 我们可以看到，这个API包含URL与参数，首先来看看如何传递这5个参数并获得数据。格式：URL + '?' + '参数名1' + '=' + '参数1' + '&' + '参数名2' + '=' + '参数2' +……实例：https://api.sky31.com/edu-new/course.php?role=sky31&hash=0267cc37887e5918c5ew21213&sid=012345781&password=666666&style=3&token=HTTP/1.1
 （这里我就不贴上自己API的调用身份和密钥了哈，大家有需要可以在[三翼开发者中心](https://sky31.com)申请。）
@@ -18,7 +18,7 @@
 ```
 如果能看到这一大坨的字符串（JSON），那么，恭喜你，API可以正常使用，我们可以继续。
 
-（2）用C#发送GET请求并得到JSON
+##（2）用C#发送GET请求并得到JSON
 
 刚才我们用浏览器打开URL并获得JSON，现在就需要用C#实现同样的功能，得到JSON。我用的是微软推荐的HttpWebRequest类：
 
@@ -43,7 +43,7 @@ return result;
 ```
 这样我们就实现了用C#发送GET请求并获得数据，下面，我们将要对我们获得的数据进行处理。
 
-3）处理JSON并获得数据
+##（3）处理JSON并获得数据
 
 下面，我们将要对 上面我们获得了JSON，但是我们在给用户呈现数据的时候肯定不能是这一大坨玩意，那么如何处理它呢？用字符串方法？NO，会累死人的。Json是具有特定格式的字串，C#中是有专门处理它的方法的：DataContractJsonSerializer.ReadObject(), 我们就用它吧
 
@@ -123,7 +123,7 @@ public int day { get; set; }
 
 这里的[DataContract]和[DataMember]是用于标记属性，把JSON对应值传入。这样子，通过ReadObject()方法，我们就能把JSON数据对应存储到对应的类里，方便使用。但是，如果我们这样自己去一个一个分析JSON数据再写出对应的类，不仅低效，而且容易出错，所以我们可以去找对应的工具自动转化JSON为C#类（我推荐一个：[C#转JSON工具](http://www.bejson.com/convert/json2csharp/)）
 
-4）最后一步：呈现数据
+##（4）最后一步：呈现数据
 现在我们已经把获得的数据存入对应类的实例中了，最后要做的就剩下把数据呈现在控件上，可以直接赋值，也可以用数据绑定的方式。这里我把值传入到绑定到控件的CourseModel：
 
 ```C#

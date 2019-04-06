@@ -2,7 +2,7 @@
 上一次我们通过调用三翼的API获取了课程信息，现在，我们要设计控件呈现出数据。这次就来做一个简单的课程表吧
 效果如下：
 
-![课程表样式](https://raw.githubusercontent.com/hongmaju/light7Local/master/img/productShow/20170518152848.png)
+![课程表样式](https://github.com/StanleyOf427/Documents/blob/master/GongGongLite/img/2_1.png)
 
 实现的方法有很多，我们这个就用自定义控件来吧：
 ##（1）创建自定义控件并编写界面
